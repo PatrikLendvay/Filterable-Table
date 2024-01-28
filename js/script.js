@@ -1,8 +1,6 @@
 $(document).ready(function(){
     // Funkcia na filtrovanie tabuľky
     function filterTable() {
-        var value = $("#myInput").val().toLowerCase();
-    
         // Získání všech hodnot z vybraných checkboxů
         var selectedIds = $(".idCheckbox:checked").map(function() {
             return this.value;
@@ -12,10 +10,12 @@ $(document).ready(function(){
             return this.value;
         }).get();
     
-        // Pokud je zaškrtnuto nějaké zaškrtávací políčko, vynuluj obsah vyhledávacího pole
+        // Pokud jsou vybrána nějaká zaškrtávací políčka, vynuluj obsah vyhledávacího pole
         if (selectedIds.length > 0 || selectedStavs.length > 0) {
             $("#myInput").val("");
         }
+    
+        var value = $("#myInput").val().toLowerCase();
     
         // Skryj všechny řádky
         $("#myTable tr").hide();
@@ -41,6 +41,7 @@ $(document).ready(function(){
             }).show();
         }
     }
+    
     
   
     // Funkcia na vytvorenie filtrov pre Id
