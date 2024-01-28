@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/custom.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <h1>Filterable Table</h1>
+  <p>Type something in the input field to search the table for first names, last names, emails or filter by username and Order status:</p>  
+  <input class="form-control" id="myInput" type="text" placeholder="Search..">
+  <br>
+
+  <div class="form-group" id="filterById">
+    <label>Filter by Username:</label><br>
+    <!-- Pridané "Select All" checkbox -->
+    <div id="filterById_group">
+      <div class="checkbox">
+        <label><input type="checkbox" id="selectAllId"> Select All</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group" id="filterByStav">
+    <label>Filter by Order status:</label><br>
+    <!-- Pridané "Select All" checkbox -->
+    <div id="filterByStav_group">
+      <div class="checkbox">
+        <label><input type="checkbox" id="selectAllStav"> Select All</label>
+      </div>
+    </div>
+  </div>
+
+  <div id="selectedValuesBox">
+      <div class="selectedValuesBoxTitle">
+          <strong>Selected Values:</strong>
+      </div>
+      <div id="selectedValues">
+      </div>
+  </div>
+
+  <table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Order status</th>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Gender</th>
+            <th>Email</th>
+            <th>Product</th>
+          </tr>
+        </thead>
+        <tbody id="myTable">
+          <tr>
+            <td>john.doe</td>
+            <td>Unpaid</td>
+            <td>John</td>
+            <td>Doe</td>
+            <td>M</td>
+            <td>john@example.com</td>
+            <td>Macbook</td>
+          </tr>
+          <tr>
+            <td>john.doe</td>
+            <td>Unpaid</td>
+            <td>John</td>
+            <td>Doe</td>
+            <td>M</td>
+            <td>john@example.com</td>
+            <td>Iphone 15</td>
+          </tr>
+          <tr>
+            <td>mary.moe</td>
+            <td>Processing</td>
+            <td>Mary</td>
+            <td>Moe</td>
+            <td>F</td>
+            <td>mary@mail.com</td>
+            <td>Camera</td>
+          </tr>
+          <tr>
+            <td>july.dooley</td>
+            <td>Shipped</td>
+            <td>July</td>
+            <td>Dooley</td>
+            <td>F</td>
+            <td>july@greatstuff.com</td>
+            <td>Canon eos 7d</td>
+          </tr>
+          <tr>
+            <td>anja.ravendale</td>
+            <td>Processed</td>
+            <td>Anja</td>
+            <td>Ravendale</td>
+            <td>F</td>
+            <td>a_r@test.com</td>
+            <td>Nikon Z6 II</td>
+          </tr>
+          <tr>
+            <td>adam.smith</td>
+            <td>Unpaid</td>
+            <td>Adam</td>
+            <td>Smith</td>
+            <td>M</td>
+            <td>adam@example.com</td>
+            <td>Laptop</td>
+          </tr>
+          <tr>
+            <td>lisa.johnson</td>
+            <td>Processing</td>
+            <td>Lisa</td>
+            <td>Johnson</td>
+            <td>F</td>
+            <td>lisa@mail.com</td>
+            <td>Smartphone</td>
+          </tr>
+          <tr>
+            <td>kevin.anderson</td>
+            <td>Shipped</td>
+            <td>Kevin</td>
+            <td>Anderson</td>
+            <td>M</td>
+            <td>kevin@greatstuff.com</td>
+            <td>Headphones</td>
+          </tr>
+          <tr>
+            <td>john.doe</td>
+            <td>Unpaid</td>
+            <td>John</td>
+            <td>Doe</td>
+            <td>M</td>
+            <td>john@example.com</td>
+            <td>Tablet</td>
+          </tr>
+          <tr>
+            <td>mary.moe</td>
+            <td>Processing</td>
+            <td>Mary</td>
+            <td>Moe</td>
+            <td>F</td>
+            <td>mary@mail.com</td>
+            <td>Printer</td>
+          </tr>
+          <tr>
+            <td>adam.smith</td>
+            <td>Unpaid</td>
+            <td>Adam</td>
+            <td>Smith</td>
+            <td>M</td>
+            <td>adam@example.com</td>
+            <td>Monitor</td>
+          </tr>
+          <tr>
+            <td>lisa.johnson</td>
+            <td>Processing</td>
+            <td>Lisa</td>
+            <td>Johnson</td>
+            <td>F</td>
+            <td>lisa@mail.com</td>
+            <td>Smartwatch</td>
+          </tr>
+          <tr>
+            <td>kevin.anderson</td>
+            <td>Shipped</td>
+            <td>Kevin</td>
+            <td>Anderson</td>
+            <td>M</td>
+            <td>kevin@greatstuff.com</td>
+            <td>Speaker</td>
+          </tr>
+          <tr>
+            <td>linda.smith</td>
+            <td>Unpaid</td>
+            <td>Linda</td>
+            <td>Smith</td>
+            <td>F</td>
+            <td>linda@example.com</td>
+            <td>External Hard Drive</td>
+          </tr>
+          <tr>
+            <td>peter.jones</td>
+            <td>Processing</td>
+            <td>Peter</td>
+            <td>Jones</td>
+            <td>M</td>
+            <td>peter@mail.com</td>
+            <td>Wireless Mouse</td>
+          </tr>
+          <tr>
+            <td>alice.anderson</td>
+            <td>Shipped</td>
+            <td>Alice</td>
+            <td>Anderson</td>
+            <td>F</td>
+            <td>alice@greatstuff.com</td>
+            <td>Keyboard</td>
+          </tr>
+          <tr>
+            <td>tom.wilson</td>
+            <td>Processed</td>
+            <td>Tom</td>
+            <td>Wilson</td>
+            <td>M</td>
+            <td>tom@test.com</td>
+            <td>Graphics Card</td>
+          </tr>
+          <tr>
+            <td>emma.davis</td>
+            <td>Unpaid</td>
+            <td>Emma</td>
+            <td>Davis</td>
+            <td>F</td>
+            <td>emma@example.com</td>
+            <td>Printer</td>
+          </tr>
+    </tbody>
+  </table>
+  
+  <p>Note that we start the search in tbody, to prevent filtering the table headers.</p>
+</div>
+
+<script src="/js/script.js"></script>
+
+</body>
+</html>
