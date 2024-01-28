@@ -113,3 +113,6 @@ div#filterById_group > div,
 div#filterByStav_group > div {
   min-width: 165px;
 }
+.fulltext_search{
+  margin-bottom: 30px;
+}

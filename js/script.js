@@ -12,6 +12,11 @@ $(document).ready(function(){
             return this.value;
         }).get();
     
+        // Pokud je zaškrtnuto nějaké zaškrtávací políčko, vynuluj obsah vyhledávacího pole
+        if (selectedIds.length > 0 || selectedStavs.length > 0) {
+            $("#myInput").val("");
+        }
+    
         // Skryj všechny řádky
         $("#myTable tr").hide();
     
@@ -36,6 +41,7 @@ $(document).ready(function(){
             }).show();
         }
     }
+    
   
     // Funkcia na vytvorenie filtrov pre Id
     function createFilters(uniqueIds, filterContainer, checkboxClass) {
