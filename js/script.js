@@ -1,6 +1,8 @@
 $(document).ready(function(){
     // Funkcia na filtrovanie tabuľky
     function filterTable() {
+        var value = $("#myInput").val().toLowerCase();
+    
         // Získání všech hodnot z vybraných checkboxů
         var selectedIds = $(".idCheckbox:checked").map(function() {
             return this.value;
@@ -13,24 +15,28 @@ $(document).ready(function(){
         // Skryj všechny řádky
         $("#myTable tr").hide();
     
-        // Pokud jsou vybrána nějaká zaškrtávací políčka, nevyprazdňuj obsah vyhledávacího pole
-        // a zobrazuj odpovídající řádky dle filtrování checkboxů
-        if (selectedIds.length > 0 || selectedStavs.length > 0) {
-            $("#myTable tr").filter(function() {
-                var rowId = $(this).find("td:eq(0)").text();
-                var rowStav = $(this).find("td:eq(1)").text();
-    
-                return (selectedIds.length === 0 || selectedIds.includes(rowId)) &&
-                       (selectedStavs.length === 0 || selectedStavs.includes(rowStav));
-            }).show();
-        } else {
-            // Pokud nejsou vybrána žádná zaškrtávací políčka, použij vyhledávání v textu
-            var value = $("#myInput").val().toLowerCase();
+        // Speciální podmínka pro vyhledávání v textu, pokud nejsou vybrána žádná zaškrtávací políčka
+        if (selectedIds.length === 0 && selectedStavs.length === 0) {
             $("#myTable tr").filter(function() {
                 return $(this).text().toLowerCase().indexOf(value) > -1;
             }).show();
+        } else {
+            // Zobraz pouze řádky, které odpovídají vybraným zaškrtávacím políčkům a obsahují hledaný výraz
+            $("#myTable tr").filter(function() {
+                var rowId = $(this).find("td:eq(0)").text();
+                var rowStav = $(this).find("td:eq(1)").text();
+                var rowText = $(this).text().toLowerCase();
+    
+                var checkboxMatch = (selectedIds.length === 0 || selectedIds.includes(rowId)) &&
+                                    (selectedStavs.length === 0 || selectedStavs.includes(rowStav));
+                var textMatch = rowText.indexOf(value) > -1;
+    
+                // Přidejte novou podmínku, aby se zohledňoval aktuální text vyhledávání
+                return checkboxMatch && (textMatch || value.trim() === "");
+            }).show();
         }
     }
+    
     
     
     
