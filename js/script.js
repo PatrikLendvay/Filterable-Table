@@ -1,8 +1,6 @@
 $(document).ready(function(){
     // Funkcia na filtrovanie tabuľky
     function filterTable() {
-        var value = $("#myInput").val().toLowerCase();
-    
         // Získání všech hodnot z vybraných checkboxů
         var selectedIds = $(".idCheckbox:checked").map(function() {
             return this.value;
@@ -15,12 +13,8 @@ $(document).ready(function(){
         // Skryj všechny řádky
         $("#myTable tr").hide();
     
-        // Pokud je vybrán alespoň jeden checkbox, vyprázdnění obsahu vyhledávacího pole
-        if (selectedIds.length > 0 || selectedStavs.length > 0) {
-            $("#myInput").val("");
-        }
-    
-        // Zobrazení řádků podle filtrování checkboxů
+        // Pokud jsou vybrána nějaká zaškrtávací políčka, nevyprazdňuj obsah vyhledávacího pole
+        // a zobrazuj odpovídající řádky dle filtrování checkboxů
         if (selectedIds.length > 0 || selectedStavs.length > 0) {
             $("#myTable tr").filter(function() {
                 var rowId = $(this).find("td:eq(0)").text();
@@ -30,12 +24,14 @@ $(document).ready(function(){
                        (selectedStavs.length === 0 || selectedStavs.includes(rowStav));
             }).show();
         } else {
-            // Speciální podmínka pro vyhledávání v textu, pokud nejsou vybrána žádná zaškrtávací políčka
+            // Pokud nejsou vybrána žádná zaškrtávací políčka, použij vyhledávání v textu
+            var value = $("#myInput").val().toLowerCase();
             $("#myTable tr").filter(function() {
                 return $(this).text().toLowerCase().indexOf(value) > -1;
             }).show();
         }
     }
+    
     
     
     
